@@ -1,0 +1,37 @@
+{
+  "name": "resume-html-skill",
+  "version": "0.1.0",
+  "description": "ATS-friendly single-file HTML resume generator for AI agents",
+  "main": "scripts/validate-resume.mjs",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-resume.mjs",
+    "test": "node scripts/validate-resume.mjs test-output/index.html",
+    "build:example": "node scripts/generate-example.mjs"
+  },
+  "keywords": [
+    "resume",
+    "html",
+    "ats",
+    "agent-skill",
+    "claude-code",
+    "openclaw"
+  ],
+  "author": "Chaceclaw",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ling-qian/resume-html-skill.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "assets/",
+    "scripts/",
+    "references/",
+    "DESIGN.md",
+    "SKILL.md",
+    "README.md"
+  ]
+}

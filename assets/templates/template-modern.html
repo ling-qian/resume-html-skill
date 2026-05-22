@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - [Your Name]</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Modern Theme - Deep Blue with Klein Blue Accent */
+      --ink: #0a1f3d;
+      --ink-rgb: 10, 31, 61;
+      --paper: #f1f3f5;
+      --paper-rgb: 241, 243, 245;
+      --accent: #002FA7; /* International Klein Blue */
+      --accent-rgb: 0, 47, 167;
+
+      /* Typography */
+      --font-sans-en: 'IBM Plex Sans', sans-serif;
+      --font-sans-zh: 'Noto Sans SC', sans-serif;
+      --font-body: var(--font-sans-en);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Slide/Page Layout */
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      padding: 5vh 5vw;
+      overflow: hidden;
+      position: relative;
+      page-break-after: always;
+      print-break-after: always;
+    }
+
+    /* Typography */
+    .name {
+      font-family: var(--font-sans-en);
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.5em;
+      color: var(--accent);
+    }
+
+    .title {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1.5em;
+      opacity: 0.85;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1.2em;
+      padding-bottom: 0.5em;
+      border-bottom: 3px solid var(--accent);
+      color: var(--accent);
+    }
+
+    /* Header */
+    .resume-header .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2em;
+      font-size: 0.9rem;
+      opacity: 0.75;
+      margin-top: 1em;
+    }
+
+    .contact-item {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .separator {
+      opacity: 0.4;
+    }
+
+    /* Summary */
+    .summary-content p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      text-align: left;
+      max-width: 850px;
+    }
+
+    /* Skills */
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7em 1em;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      padding: 0.35em 0.9em;
+      background: var(--accent);
+      color: white;
+      border-radius: 3px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Experience */
+    .experience-entry {
+      margin-bottom: 2.5em;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.3em;
+    }
+
+    .company {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    .position {
+      font-size: 1rem;
+      font-weight: 500;
+      font-style: italic;
+      margin-bottom: 0.8em;
+      opacity: 0.9;
+    }
+
+    .bullets {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .bullets li {
+      position: relative;
+      padding-left: 1.5em;
+      margin-bottom: 0.6em;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .bullets li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Dual Experience */
+    .dual-experience {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5em;
+    }
+
+    /* Education */
+    .education-entry {
+      margin-bottom: 1.8em;
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.2em;
+    }
+
+    .institution {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .degree {
+      font-size: 1rem;
+      font-style: italic;
+      margin-bottom: 0.3em;
+    }
+
+    .gpa {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Projects */
+    .project-entry {
+      margin-bottom: 1.8em;
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.3em;
+      color: var(--accent);
+    }
+
+    .tech-stack {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-bottom: 0.5em;
+      background: rgba(0, 47, 167, 0.1);
+      display: inline-block;
+      padding: 0.2em 0.5em;
+      border-radius: 2px;
+    }
+
+    /* Certifications */
+    .cert-list {
+      list-style: none;
+    }
+
+    .cert-list li {
+      margin-bottom: 0.8em;
+      font-size: 1rem;
+      padding-left: 1.5em;
+      position: relative;
+    }
+
+    .cert-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .cert-issuer {
+      display: block;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 0.2em;
+    }
+
+    .cert-date {
+      float: right;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    /* Languages */
+    .language-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    .language-item {
+      display: grid;
+      grid-template-columns: 150px 1fr auto;
+      align-items: center;
+      gap: 1em;
+    }
+
+    .lang-name {
+      font-weight: 500;
+    }
+
+    .proficiency-bar {
+      height: 8px;
+      background: rgba(10, 31, 61, 0.15);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .proficiency-level {
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    /* Volunteer */
+    .volunteer-entry {
+      margin-bottom: 1.5em;
+    }
+
+    .organization {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .role {
+      font-size: 1rem;
+      font-style: italic;
+      margin-bottom: 0.5em;
+      opacity: 0.9;
+    }
+
+    /* Publications */
+    .publication-entry {
+      margin-bottom: 1.2em;
+    }
+
+    .pub-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.2em;
+      color: var(--accent);
+    }
+
+    .pub-venue {
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    .pub-date {
+      float: right;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    /* Closing */
+    .closing-content {
+      text-align: center;
+      padding-top: 20vh;
+    }
+
+    .closing-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1em;
+      color: var(--accent);
+    }
+
+    .references-list {
+      margin-top: 2em;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Print */
+    @media print {
+      .slide {
+        page-break-after: always;
+        height: auto;
+        min-height: 100vh;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      body {
+        background: white;
+        color: black;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="deck"></div>
+  <script src="templates.js"></script>
+  <script>
+    console.log('Modern Resume Template loaded.');
+  </script>
+</body>
+</html>

@@ -206,11 +206,7 @@ const templates = {
 `
 };
 
-// Export for both Node.js CommonJS and ESM
+// Export for CommonJS
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = templates;
-}
-// For ESM imports
-if (typeof window === 'undefined') {
-  export default templates;
 }

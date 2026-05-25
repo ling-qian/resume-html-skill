@@ -17,13 +17,13 @@
  * }
  */
 
-import { readFile, writeFile, mkdir } from 'fs/promises';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { createCanvas, loadImage, registerFont } from 'canvas';
+const fsPromises = require("fs").promises; // readFile, writeFile, mkdir
+const path = require("path");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const { createCanvas, loadImage } = require("canvas");
+
+
+
 
 // 平台尺寸配置
 const PLATFORMS = {
@@ -233,11 +233,11 @@ async function main() {
 
   try {
     // 读取简历数据
-    const raw = await readFile(inputPath, 'utf8');
+    const raw = await fsPromises.readFile(inputPath, 'utf8');
     const data = JSON.parse(raw);
 
     // 确保输出目录存在
-    await mkdir(outputDir, { recursive: true });
+    await fsPromises.mkdir(outputDir, { recursive: true });
 
     console.log(`🎨 Generating covers for theme "${theme}"...\n`);
 
@@ -252,7 +252,7 @@ async function main() {
 
       const buffer = await generateCover(data, platform, theme);
       const outputPath = join(outputDir, `${platform}-${theme}.png`);
-      await writeFile(outputPath, buffer);
+      await fsPromises.writeFile(outputPath, buffer);
       console.log(`  ✅ Saved: ${outputPath}`);
     }
 
@@ -266,17 +266,67 @@ async function main() {
   }
 }
 
-
-// Export for CLI
-export async function generateCovers(options) {
-  const { input, output = './covers', theme = 'modern', platforms } = options;
-  // 复用 main 逻辑，但使用 options 参数
-  return main({ input, output, theme, platforms });
+// 保持原始 main 用于直接执行
+function mainFromArgs() {
+  const args = process.argv.slice(2);
+  const params = new URLSearchParams();
+  args.forEach(arg => {
+    if (arg.startsWith('--')) {
+      const [key, value] = arg.slice(2).split('=');
+      params.set(key, value);
+    }
+  });
+  return runGenerate({
+    input: params.get('input'),
+    output: params.get('output') || './covers',
+    theme: params.get('theme') || 'modern',
+    platforms: params.get('platforms')?.split(',') || Object.keys(PLATFORMS)
+  });
 }
 
-// Export for CLI (works with require when package.json type=module via createRequire)
-if (typeof require !== 'undefined' && require.main) {
-  const { createRequire } = require('module');
-  const require = createRequire(import.meta.url);
-  module.exports = { generateCovers: main };
+async function runGenerate({ input, output, theme, platforms }) {
+  if (!input) {
+    console.error('Usage: node generate-covers.cjs --input data.json --output covers/ --theme modern [--platforms linkedin,wechat]');
+    process.exit(1);
+  }
+
+  try {
+    const raw = await fsPromises.readFile(input, 'utf8');
+    const data = JSON.parse(raw);
+    await fsPromises.mkdir(output, { recursive: true });
+    console.log(`🎨 Generating covers for theme "${theme}"...\n`);
+
+    for (const platform of platforms) {
+      if (!PLATFORMS[platform]) {
+        console.warn(`⚠️  Unknown platform: ${platform}, skipping.`);
+        continue;
+      }
+      const config = PLATFORMS[platform];
+      console.log(`Generating ${platform} (${config.width}×${config.height})...`);
+      const buffer = await generateCover(data, platform, theme);
+      const outputPath = join(output, `${platform}-${theme}.png`);
+      await fsPromises.writeFile(outputPath, buffer);
+      console.log(`  ✅ Saved: ${outputPath}`);
+    }
+    console.log('\n✨ All covers generated successfully!');
+  } catch (err) {
+    console.error('❌ Error:', err.message);
+    if (err.code === 'MODULE_NOT_FOUND') {
+      console.error('  提示: canvas 库未安装？运行: npm install canvas');
+    }
+    process.exit(1);
+  }
 }
+
+// 原始 main 改为调用 wrapper
+function main() {
+  return mainFromArgs();
+}
+
+// 导出给 CLI 使用
+module.exports = {
+  PLATFORMS,
+  generateCover,
+  runGenerate,
+  main
+}; generateCover, runGenerate, main };

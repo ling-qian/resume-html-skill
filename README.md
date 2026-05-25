@@ -378,6 +378,34 @@ npx resume-html-skill headshot \
 
 ---
 
+
+#### 🔄 统一 images 命令支持的完整类型
+
+| 类型 | 说明 | 必填选项 |
+|------|------|----------|
+| `headshot` | 生成职业照 | `--input` (prompt) |
+| `cover` | 多平台封面 | `--input` (JSON) |
+| `framed` | 截图美化 | `--input` (目录或文件) |
+
+示例 - 批量生成所有平台封面：
+```bash
+npx resume-html-skill images --type cover \
+  --input examples/cover-data.json \
+  --output ./covers \
+  --theme editorial \
+  --platforms linkedin,wechat,youtube
+```
+
+示例 - 美化截图（默认 macOS 风格）：
+```bash
+npx resume-html-skill images --type framed \
+  --input ./raw-screenshots \
+  --output ./framed \
+  --theme swiss \
+  --style brutalist \
+  --width 1200
+```
+
 ### 🛠️ 脚本 API（Node.js 调用）
 
 ```javascript

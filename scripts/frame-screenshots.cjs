@@ -20,3 +20,4 @@ console.log('\n规划功能:');
 console.log('  node scripts/frame-screenshots.mjs --input tmp/raw --output assets/framed --theme modern --style macos');
 console.log('\n依赖: canvas (或 sharp)');
 process.exit(0);
+module.exports = { frameScreenshot, main: _main };

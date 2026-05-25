@@ -251,3 +251,184 @@ resume-html-skill/
 ## License
 
 MIT © 2026
+
+## 🎮 CLI 使用指南
+
+```bash
+# 1️⃣ 多平台封面生成（一站式）
+npx resume-html-skill covers \
+  --input data.json \
+  --output ./generated/covers \
+  --theme swiss \
+  --platforms linkedin,wechat,xiaohongshu
+
+# 2️⃣ 截图美化（批量）
+npx resume-html-skill frame \
+  --input ./raw-screenshots \
+  --output ./assets/framed \
+  --theme modern \
+  --style macos
+
+# 3️⃣ 生成职业照
+npx resume-html-skill headshot \
+  --prompt "professional software engineer, smiling, studio lighting" \
+  --output ./assets/headshot.png \
+  --theme modern
+```
+
+> ⚠️ **注意**: 运行前请确保已安装依赖：
+> ```bash
+> npm install
+> ```
+
+## Phase 3: 配图工作流与多平台封面
+
+> 版本: `v1.3.0` · 状态: ✅ 已实现
+
+### ✨ 主要特性
+
+| 特性 | 说明 |
+|------|------|
+| 🖼️ 多平台封面生成 | 自动生成 LinkedIn / 公众号 / 小红书 / Twitter / YouTube 封面 |
+| 🎨 主题适配 | 封面根据选定的主题配色与字体自动渲染 |
+| 📐 Canvas 高清渲染 | 输出 PNG 高清图像 (最高 2560×1440) |
+| 🖥️ 截图美化 | 为项目截图添加 macOS / Minimal / Brutalist 风格边框 |
+| 🤖 AI 职业照集成 | 对接 DALL-E 3 自动生成专业头照 |
+
+---
+
+### 📦 依赖安装
+
+```bash
+# 在技能目录下运行
+cd /Users/tom/.openclaw/workspace/.agents/skills/resume-html-skill
+npm install
+```
+
+依赖说明：
+- `canvas`：用于封面渲染 ⚠️ 需要系统 Cairo 库（macOS: `brew install pkg-config cairo pango libpng jpeg giflib`）
+- `sharp`：截图处理
+- `commander`：CLI 框架
+- `openai`：职业照生成
+
+---
+
+### 🎮 CLI 使用
+
+#### 1️⃣ 生成多平台封面
+
+```bash
+npx resume-html-skill covers \
+  --input examples/cover-data.json \
+  --output generated/covers \
+  --theme swiss \
+  --platforms linkedin,wechat,xiaohongshu
+```
+
+参数：
+- `--input`: JSON 简历数据（包含 name, title, tagline）
+- `--output`: 输出目录
+- `--theme`: 主题（conservative, modern, swiss, editorial）
+- `--platforms`: 逗号分隔的平台列表
+
+输出文件：
+```
+generated/covers/
+├── linkedin-swiss.png
+├── wechat-swiss.png
+└── xiaohongshu-swiss.png
+```
+
+#### 2️⃣ 批量截图美化
+
+```bash
+npx resume-html-skill frame \
+  --input tmp/screenshots \
+  --output assets/framed \
+  --theme modern \
+  --style macos \
+  --width 1200
+```
+
+`--style` 可选值：
+- `macos`：模拟 macOS 窗口，带红黄绿按钮（现代主题）
+- `minimal`：极细边框，无装饰（保守/杂志风）
+- `brutalist`：粗黑边框，直角（Swiss 风格）
+
+#### 3️⃣ 生成职业照
+
+```bash
+npx resume-html-skill headshot \
+  --prompt "professional software engineer, smiling, studio lighting" \
+  --output assets/headshot.png \
+  --theme swiss
+```
+
+环境变量：
+- `OPENAI_API_KEY`: OpenAI API Key（必填，或通过 `--apiKey` 传递）
+
+---
+
+### 📚 提示词库
+
+见 `references/image-prompts.md`，包含：
+- 职业照生成模板（4 主题版）
+- 截图美化提示
+- 技能图表、项目背景图提示
+
+---
+
+### 🛠️ 脚本 API（Node.js 调用）
+
+```javascript
+// covers
+const { generateCovers } = require('./scripts/generate-covers.cjs');
+await generateCovers({
+  input: 'data.json',
+  output: './covers',
+  theme: 'editorial',
+  platforms: ['linkedin', 'wechat']
+});
+
+// frame
+const { frameScreenshots } = require('./scripts/frame-screenshots.cjs');
+await frameScreenshots({
+  input: './raw',
+  output: './framed',
+  theme: 'swiss',
+  style: 'macos',
+  width: 1000
+});
+
+// headshot
+const { generateHeadshot } = require('./scripts/generate-headshot.cjs');
+await generateHeadshot({
+  prompt: 'data scientist with glasses, professional',
+  output: './headshot.png',
+  theme: 'modern'
+});
+```
+
+---
+
+### 📁 文件结构
+
+```
+assets/
+├── framed/          # 截图美化后文件
+├── backgrounds/     # 纹理资源
+└── icons/           # 社交图标
+
+scripts/
+├── cli.js           # CLI 入口
+├── generate-covers.cjs
+├── frame-screenshots.cjs
+└── generate-headshot.cjs
+
+references/
+├── image-prompts.md      # 提示词库
+└── screenshot-framing.md # 美化规范
+
+examples/
+└── cover-data.json       # 封面生成示例数据
+```

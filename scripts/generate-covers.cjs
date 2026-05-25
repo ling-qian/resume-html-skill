@@ -266,4 +266,17 @@ async function main() {
   }
 }
 
-main();
+
+// Export for CLI
+export async function generateCovers(options) {
+  const { input, output = './covers', theme = 'modern', platforms } = options;
+  // 复用 main 逻辑，但使用 options 参数
+  return main({ input, output, theme, platforms });
+}
+
+// Export for CLI (works with require when package.json type=module via createRequire)
+if (typeof require !== 'undefined' && require.main) {
+  const { createRequire } = require('module');
+  const require = createRequire(import.meta.url);
+  module.exports = { generateCovers: main };
+}

@@ -4,8 +4,8 @@
 
 1. **ATS 优先**：所有版式必须通过 Workday/Greenhouse 解析器
 2. **单文件交付**：零依赖，浏览器直接打开
-3. **版式锁定**：12 个标准 section，禁止自由发挥
-4. **主题预设**：2 套配色（保守/现代），禁止自定义 hex
+3. **版式锁定**：18 个标准 section，禁止自由发挥
+4. **主题预设**：4 套完整样式（保守/现代/Swiss/Editorial），通过 CSS 变量统一管理，禁止自定义 hex
 
 ---
 
@@ -35,48 +35,86 @@
 
 ---
 
-## 12 个版式登记
+## 18 个版式登记
 
 每个版式对应一个 `<section class="slide" data-layout="Rxx">`
 
-| ID | 名称 | 用途 | 必须保留骨架 |
-|-----|------|------|------------|
-| R01 | Header | 姓名、职位、联系信息 | 顶部大姓名字体、下方三列联系信息 |
-| R02 | Professional Summary | 3-4 行专业摘要 | 左对齐段落，无缩进 |
-| R03 | Key Skills | 技能标签云 | 单行技能标签，wrap allowed |
-| R04 | Work Experience (Single) | 单个工作经历 | 公司+职位+日期+bullet points |
-| R05 | Work Experience (Dual) | 两个并排工作经历 | 左右两列，高度可不同 |
-| R06 | Education | 教育背景 | 学校+学位+专业+日期+GPA (可选) |
-| R07 | Projects | 项目展示 | 项目名+技术栈+要点 |
-| R08 | Certifications | 证书列表 | 证书名+颁发机构+日期 |
-| R09 | Languages | 语言能力 | 语言+熟练度条 |
-| R10 | Volunteer | 志愿服务 | 组织+角色+日期+要点 |
-| R11 | Publications | 出版物 | 标题+发表处+日期 |
-| R12 | Closing | 结尾/参考人 | "References available upon request" 或参考人信息 |
+| ID | 名称 | 用途 | 必须保留骨架 | 适用场景 | 适用场景 |
+|-----|------|------|------------|----------|
+| R01 | Header | 姓名、职位、联系信息 | 顶部大姓名字体、下方三列联系信息 | 必选，简历顶部 |
+| R02 | Professional Summary | 3-4 行专业摘要 | 左对齐段落，无缩进 |  senior 岗位建议 |
+| R03 | Key Skills | 技能标签云 | 单行技能标签，wrap allowed | 技术岗核心 |
+| R04 | Work Experience (Single) | 单个工作经历 | 公司+职位+日期+bullet points | 重点经历详述 |
+| R05 | Work Experience (Dual) | 两个并排工作经历 | 左右两列，高度可不同 | 节省空间 |
+| R06 | Education | 教育背景 | 学校+学位+专业+日期+GPA (可选) | 应届生/应届 |
+| R07 | Projects | 项目展示 | 项目名+技术栈+要点 | 项目经历 |
+| R08 | Certifications | 证书列表 | 证书名+颁发机构+日期 | 认证密集型岗位 |
+| R09 | Languages | 语言能力 | 语言+熟练度条 | 多语言场景 |
+| R10 | Volunteer | 志愿服务 | 组织+角色+日期+要点 | 社会影响力岗位 |
+| R11 | Publications | 出版物 | 标题+发表处+日期 | 研究/学术岗 |
+| R12 | Closing | 结尾/参考人 | "References available upon request" | 传统简历结尾 |
+| R13 | Cover | 大字封面 | 超大姓名+职位+tagline+联系 | 幻灯片简历版（非纯 ATS） |
+| R14 | Stats | 大数字成就 | 4 个关键数据展示 | 成果导向岗位 |
+| R15 | Project Cards | 双列项目卡片 | 卡片网格（标题+tech+描述） | 作品集展示 |
+| R16 | Skills Tags | 增强技能标签云 | 更大更散的标签布局 | 技能多样化 |
+| R17 | Timeline | 职业时间线 | 垂直时间线（年-角色-公司）| 职业成长叙事 |
+| R18 | Contact | 联系方式页 | 二维码 + 社交信息网格 | 面试结束页 |
 
 **规则：**
-- 正文页必须从这 12 个中选择，不得发明 `R13` 等
+- 正文页必须从这 18 个中选择，不得发明 `R19` 等
 - 每个版式的 HTML 结构必须严格保留类名和嵌套顺序
+- **R13-R18 为 Phase 1 新增**，主要用于演示场景（幻灯片顺序播放），如需打印 ATS 友好版本请使用 R01-R12
 
 ---
 
 ## 主题系统
 
-### Theme A: Conservative (默认)
-- **主色**：墨水黑 `#0a0a0b`
-- **背景**：暖米白 `#f1efea`
-- **强调色**：无（仅黑白灰）
-- **字体**：英 `Georgia` / 中 `Noto Serif SC`（保守、易读）
-- **适用场景**：金融、法律、政府、传统行业
+### Conservative (默认)
+- **Ink**: `#0a0a0b` | **Paper**: `#f1efea` | **Accent**: `#0a0a0b`
+- **字体**: Source Serif 4 / Noto Serif SC（衬线，传统信任感）
+- **典型用途**: 金融、法律、咨询、政府
 
-### Theme B: Modern
-- **主色**：深蓝 `#0a1f3d`
-- **背景**：瓷白 `#f1f3f5`
-- **强调色**：克莱因蓝 `#002FA7`
-- **字体**：英 `IBM Plex Sans` / 中 `Noto Sans SC`（清晰、科技感）
-- **适用场景**：科技、创业、设计、创意行业
+### Modern
+- **Ink**: `#0a1f3d` | **Paper**: `#f1f3f5` | **Accent**: `#002FA7`
+- **字体**: IBM Plex Sans / Noto Sans SC（无衬线，科技感）
+- **典型用途**: SaaS、创业、产品、设计
 
-**切换方式：** 在 `template.html` 的 `:root` 整体替换 `--ink`、`--ink-rgb`、`--paper`、`--paper-rgb`、`--accent`、`--accent-rgb`
+### Swiss (Phase 2)
+- **Ink**: `#000000` | **Paper**: `#FFFFFF` | **Accent**: `#FF3B30`
+- **字体**: Inter / Noto Sans SC（极简无衬线，强网格）
+- **典型用途**: 设计师、建筑师、极简作品集
+- **风格DNA**: 不对称、大字号、数学秩序、直角边框
+
+### Editorial (Phase 2)
+- **Ink**: `#2D2D2D` | **Paper**: `#F5F5F0` | **Accent**: `#C41E3A`
+- **字体**: Cormorant Garamond / Noto Serif SC（古典优雅）
+- **典型用途**: 文化、艺术、学术、媒体
+- **风格DNA**: 宽松行距、杂志感、衬线体、暖纸张
+
+### 切换机制
+
+`themes.js` 提供 CSS 变量预设和自动应用逻辑。优先级：
+
+```
+URL 参数 ?theme=swiss > localStorage > data-default-theme > conservative
+```
+
+HTML 中声明默认主题：
+```html
+<html data-default-theme="modern">
+```
+
+URL 强制覆盖：
+```
+output.html?theme=editorial
+```
+
+JS 动态切换：
+```js
+window.ResumeThemes.setTheme('swiss');
+```
+
+可用值：`conservative`, `modern`, `swiss`, `editorial`
 
 ---
 
@@ -89,14 +127,18 @@ resume-html-skill/
 ├── DESIGN.md             # 本文件（设计系统）
 ├── LICENSE               # MIT
 ├── assets/
-│   ├── templates/
-│   │   ├── template-conservative.html   # 保守主题骨架
-│   │   ├── template-modern.html         # 现代主题骨架
-│   │   └── templates.js                 # 片段库（12个版式HTML片段）
-│   ├── themes/
-│   │   ├── conservative.css
-│   │   └── modern.css
-│   └── screenshot-backgrounds/           # 截图背景（如有）
+│   └── templates/
+│       ├── template-conservative.html   # 保守主题骨架
+│       ├── template-modern.html         # 现代主题骨架
+│       ├── template-swiss.html          # Phase 2: Swiss Minimal 风格
+│       ├── template-editorial.html      # Phase 2: Editorial 杂志风
+│       ├── templates.js                 # 18 版式 HTML 片段库
+│       └── themes.js                    # 主题预设系统（4 套 CSS 变量）
+│       ├── template-swiss.html          # Phase 2: Swiss Minimal 风格
+│       ├── template-editorial.html      # Phase 2: Editorial 杂志风
+│       ├── templates.js                 # 18 版式 HTML 片段库 (R01-R18)
+│       └── themes.js                    # 主题预设系统（4 套 CSS 变量）
+
 ├── references/
 │   ├── checklist.md       # P0/P1 质量清单
 │   ├── ats-rules.md       # ATS 详细规则（本文件精华）

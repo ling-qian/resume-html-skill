@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" data-default-theme="swiss">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - [Your Name]</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* Swiss Minimal - Theme Variables (will be set by themes.js) */
+    :root {
+      --ink: #000000;
+      --paper: #FFFFFF;
+      --accent: #FF3B30;
+      --spacing-padding: 4vh 4vw;
+      --name-size: 3rem;
+      --section-title-size: 1.5rem;
+      --border-width: 3px;
+      --border-radius: 0;
+      --font-body: var(--font-sans-en);
+    }
+
+    /* Font stacks */
+    :root {
+      --font-sans-en: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-sans-zh: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Slide/Page Layout */
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      padding: var(--spacing-padding);
+      overflow: hidden;
+      position: relative;
+      page-break-after: always;
+      print-break-after: always;
+    }
+
+    /* Typography - Swiss style: big, bold, asymmetric */
+    .name {
+      font-family: var(--font-sans-en);
+      font-size: var(--name-size);
+      font-weight: 800;
+      line-height: 0.95;
+      margin-bottom: 0.4em;
+      letter-spacing: -0.02em;
+    }
+
+    .title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 0.8em;
+      opacity: 0.75;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .section-title {
+      font-size: var(--section-title-size);
+      font-weight: 700;
+      margin-bottom: 0.8em;
+      padding-bottom: 0.4em;
+      border-bottom: var(--border-width) solid var(--accent);
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Header */
+    .resume-header .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2em;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-top: 0.6em;
+      font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+    }
+
+    .separator {
+      opacity: 0.3;
+    }
+
+    /* Summary */
+    .summary-content p {
+      font-size: 1rem;
+      line-height: 1.6;
+      text-align: left;
+      max-width: 800px;
+    }
+
+    /* Skills - Swiss: more geometric, larger tags */
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6em 1em;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      padding: 0.4em 0.9em;
+      background: var(--accent);
+      color: white;
+      border-radius: var(--border-radius);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    /* Experience - Swiss: tight, bold, information-dense */
+    .experience-entry {
+      margin-bottom: 1.8em;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.25em;
+      padding-bottom: 0.3em;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .company {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .date {
+      font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+      font-size: 0.8rem;
+      opacity: 0.65;
+      text-transform: uppercase;
+    }
+
+    .position {
+      font-size: 1rem;
+      font-weight: 500;
+      font-style: italic;
+      margin-bottom: 0.6em;
+      opacity: 0.85;
+    }
+
+    .bullets {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .bullets li {
+      position: relative;
+      padding-left: 1.4em;
+      margin-bottom: 0.5em;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .bullets li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Dual Experience */
+    .dual-experience {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2em;
+    }
+
+    /* Education */
+    .education-entry {
+      margin-bottom: 1.2em;
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.2em;
+    }
+
+    .institution {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .degree {
+      font-size: 1rem;
+      font-style: italic;
+      margin-bottom: 0.3em;
+    }
+
+    .gpa {
+      font-size: 0.9rem;
+      opacity: 0.75;
+    }
+
+    /* Projects */
+    .project-entry {
+      margin-bottom: 1.2em;
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.2em;
+      color: var(--accent);
+    }
+
+    .tech-stack {
+      font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+      font-size: 0.75rem;
+      opacity: 0.6;
+      margin-bottom: 0.4em;
+      background: rgba(0,0,0,0.05);
+      display: inline-block;
+      padding: 0.15em 0.5em;
+      border-radius: var(--border-radius);
+    }
+
+    /* Certifications */
+    .cert-list {
+      list-style: none;
+    }
+
+    .cert-list li {
+      margin-bottom: 0.7em;
+      font-size: 0.95rem;
+      padding-left: 1.2em;
+      position: relative;
+    }
+
+    .cert-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .cert-issuer {
+      display: block;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 0.15em;
+    }
+
+    .cert-date {
+      float: right;
+      font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    /* Languages */
+    .language-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8em;
+    }
+
+    .language-item {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      align-items: center;
+      gap: 1em;
+    }
+
+    .lang-name {
+      font-weight: 600;
+    }
+
+    .proficiency-bar {
+      height: 6px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .proficiency-level {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* Volunteer */
+    .volunteer-entry {
+      margin-bottom: 1.4em;
+    }
+
+    .organization {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .role {
+      font-size: 1rem;
+      font-weight: 500;
+      font-style: italic;
+      margin-bottom: 0.4em;
+      opacity: 0.85;
+    }
+
+    /* Publications */
+    .publication-entry {
+      margin-bottom: 1em;
+    }
+
+    .pub-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.15em;
+      color: var(--accent);
+    }
+
+    .pub-venue {
+      font-style: italic;
+      opacity: 0.8;
+    }
+
+    .pub-date {
+      float: right;
+      font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    /* Closing */
+    .closing-content {
+      text-align: left;
+      padding-top: 18vh;
+    }
+
+    .closing-content h2 {
+      font-size: 2rem;
+      margin-bottom: 0.8em;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .references-list {
+      margin-top: 2em;
+      text-align: left;
+      max-width: 600px;
+    }
+
+    /* Print */
+    @media print {
+      .slide {
+        page-break-after: always;
+        height: auto;
+        min-height: 100vh;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      body {
+        background: white;
+        color: black;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* === R13-R18 新版式样式 === */
+
+    /* R13: Cover */
+    .cover-container {
+      text-align: center;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .cover-name {
+      font-size: 4rem;
+      margin-bottom: 0.4em;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .cover-title {
+      font-size: 1.4rem;
+      font-weight: 500;
+      opacity: 0.8;
+      margin-bottom: 0.5em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .cover-tagline {
+      font-size: 1.1rem;
+      opacity: 0.75;
+      max-width: 650px;
+      margin-bottom: 1.4em;
+    }
+    .cover-contact {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.1em;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* R14: Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8em;
+      margin-top: 1.2em;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 1.6em;
+      border: 3px solid var(--ink);
+      background: rgba(0,0,0,0.02);
+    }
+    .stat-value {
+      font-size: 3.8rem;
+      font-weight: 900;
+      margin-bottom: 0.3em;
+      color: var(--accent);
+    }
+    .stat-label {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* R15: Project Cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.4em;
+      margin-top: 1em;
+    }
+    .project-card {
+      padding: 1.2em;
+      border: 3px solid var(--ink);
+      border-radius: 0;
+      background: white;
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.25em;
+      color: var(--accent);
+    }
+    .card-tech {
+      font-size: 0.8rem;
+      opacity: 0.65;
+      margin-bottom: 0.4em;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .card-desc {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* R16: Skills Tags */
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7em 1em;
+      margin-top: 0.7em;
+    }
+    .skill-tag {
+      display: inline-block;
+      padding: 0.45em 1em;
+      border: 3px solid var(--ink);
+      border-radius: 0;
+      background: transparent;
+      color: var(--ink);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    /* R17: Timeline */
+    .timeline {
+      position: relative;
+      margin-top: 1.2em;
+      padding-left: 2.5em;
+      border-left: 3px solid var(--accent);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2em;
+      padding-left: 1.2em;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -2.8em;
+      top: 0.35em;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px var(--ink);
+    }
+    .timeline-year {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      font-family: 'IBM Plex Mono', monospace;
+      margin-bottom: 0.2em;
+      text-transform: uppercase;
+    }
+    .timeline-content {
+      margin-left: 0.5em;
+    }
+    .timeline-role {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .timeline-company {
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    /* R18: Contact */
+    .contact-container {
+      text-align: center;
+      padding-top: 12vh;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5em;
+      margin-top: 2.5em;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    .contact-item-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-placeholder {
+      width: 160px;
+      height: 160px;
+      border: 3px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.5;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .qr-label {
+      margin-top: 1em;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .qr-image {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+    }
+    .contact-info-block {
+      padding-top: 1.2em;
+    }
+    .info-name {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.3em;
+    }
+    .info-title {
+      font-size: 1.15rem;
+      opacity: 0.8;
+      margin-bottom: 1.2em;
+    }
+    .info-list p {
+      margin-bottom: 0.7em;
+      font-size: 1rem;
+    }
+
+    /* Print */
+
+  </style>
+</head>
+<body>
+  <div id="deck"></div>
+  <script src="templates.js"></script>
+  <script src="themes.js"></script>
+  <script>
+    // Automatically apply theme (themes.js will set data-theme and CSS variables)
+    console.log('Swiss Minimal Template loaded. Theme auto-applied by themes.js.');
+  </script>
+</body>
+</html>

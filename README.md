@@ -43,15 +43,17 @@ Agent 会：
 | 特性 | 说明 |
 |------|------|
 | **ATS 安全** | 禁止 table、双列、emoji、SVG 文字，遵循 Workday/Greenhouse 解析规则 |
-| **版式锁定** | 12 个标准 section（R01-R12），防止自由发挥导致解析失败 |
-| **双主题** | 保守（金融/法律）+ 现代（科技/设计），一键切换 |
+| **版式锁定** | 18 个标准 section（R01-R18），防止自由发挥导致解析失败 |
+| **多风格系统** | 4 套预设风格（保守/现代/Swiss/Editorial），通过 themes.js 切换 |
+| **配图工作流** | Phase 3: 职业照生成、截图美化、技能图表（GPT-Image 集成） |
+| **多平台封面** | Phase 3: 自动生成 LinkedIn / 公众号 / 小红书等多尺寸封面 |
 | **自动校验** | `validate-resume.mjs` 拦截 P0 错误，确保交付质量 |
 | **单文件交付** | 无依赖，浏览器直接打开，支持打印为 PDF |
 | **Agent 友好** | HTML 纯文本，Agent 可直接读写、修改、验证 |
 
 ---
 
-## 📐 12 个版式
+## 📐 18 个版式
 
 | ID | 名称 | 用途 |
 |-----|------|------|
@@ -67,8 +69,16 @@ Agent 会：
 | R10 | Volunteer | 志愿服务 |
 | R11 | Publications | 出版物 |
 | R12 | Closing | 结尾/参考人 |
+| R13 | Cover | 大字封面（个人品牌展示） |
+| R14 | Stats | 大数字成就展示 |
+| R15 | Project Cards | 双列项目卡片（作品集） |
+| R16 | Skills Tags | 增强型技能标签云 |
+| R17 | Timeline | 职业时间线 |
+| R18 | Contact | 二维码 + 社交链接页 | 二维码 + 社交链接页 |
 
-**规则：** 正文页必须从这 12 个版式选择，不得发明新结构。
+**规则：** 正文页必须从这 18 个版式选择，不得发明新结构。
+
+> **注**：R13-R18 为 Phase 1 新增版式，主要用于演示型简历或作品集，而非严格 ATS 扫描场景。
 
 ---
 
@@ -84,6 +94,30 @@ Agent 会：
 - 无衬线字体（IBM Plex Sans / Noto Sans SC）
 - 适合：科技、创业、设计、创意行业
 
+### Swiss (Phase 2 新增)
+- 纯黑 `#000000` + 纯白 `#FFFFFF` + 国际橙 `#FF3B30`
+- 无衬线字体（Inter / Noto Sans SC）
+- 强网格、直角、不对称布局
+- 适合：设计师、建筑师、极简主义作品集
+
+### Editorial (Phase 2 新增)
+- 深灰 `#2D2D2D` + 暖米白 `#F5F5F0` + 猩红 `#C41E3A`
+- 衬线字体（Cormorant Garamond / Noto Serif SC）
+- 宽松行距、杂志社论风格
+- 适合：文化、艺术、学术、出版
+
+### 切换主题
+
+`themes.js` 自动应用（优先级：URL > localStorage > data-default-theme）：
+
+```html
+<html data-default-theme="modern">
+```
+
+URL 覆盖: `output.html?theme=swiss`
+
+JavaScript: `window.ResumeThemes.setTheme('editorial')`
+
 ---
 
 ## ✅ 质量门槛
@@ -96,7 +130,7 @@ Agent 会：
 - ❌ 双列布局（`column-count >= 2`）
 - ❌ 背景图片遮挡文字
 - ❌ 非标准 section 标题（如 "My Journey"）
-- ❌ 未注册版式（非 R01-R12）
+- ❌ 未注册版式（非 R01-R18）
 
 ### P1 (Warning) - 建议修复
 - ⚠️ 日期格式不统一
@@ -134,7 +168,25 @@ Agent: 运行校验... 0 errors, 1 warning。
 node scripts/validate-resume.mjs output/index.html
 
 # 期望输出: ✅ Validation passed (0 errors)
+# 如果使用新版式 (R13-R18)，确保你也已更新 templates.js 和验证器白名单
 ```
+
+## 🖼️ 生成多平台封面
+
+将简历数据转为社交媒体封面（LinkedIn 头图、微信公众号等）：
+
+```bash
+# 准备数据文件 (cover-data.json)
+node scripts/generate-covers.mjs \
+  --input examples/cover-data.json \
+  --output output/covers \
+  --theme swiss \
+  --platforms linkedin,wechat
+```
+
+支持平台：`linkedin`, `wechat`, `xiaohongshu`, `twitter`, `youtube`
+
+输出：`output/covers/linkedin-swiss.png`, `wechat-swiss.png`, ...
 
 ---
 
@@ -145,17 +197,25 @@ resume-html-skill/
 ├── SKILL.md
 ├── README.md
 ├── DESIGN.md
+├── LAYOUTS.md           # 18 个版式的详细使用指南与主题适配
 ├── LICENSE
 ├── assets/
 │   └── templates/
 │       ├── template-conservative.html
 │       ├── template-modern.html
-│       └── templates.js          # 12版式片段库
+│       ├── template-swiss.html          # Phase 2 新增
+│       ├── template-editorial.html      # Phase 2 新增
+│       ├── templates.js                # 18版式片段库 (R01-R18)
+│       └── themes.js                   # 主题预设系统（4 套风格）
 ├── references/
-│   ├── checklist.md              # P0/P1质量清单
-│   └── ats-rules.md              # ATS解析规则详解
+│   ├── checklist.md              # P0/P1 质量清单
+│   ├── ats-rules.md              # ATS 解析规则详解
+│   ├── image-prompts.md          # Phase 3 配图提示词库
+│   └── screenshot-framing.md     # Phase 3 截图美化规范
 └── scripts/
-    └── validate-resume.mjs       # 自动校验脚本
+    ├── validate-resume.mjs       # 自动校验脚本
+    ├── generate-covers.mjs       # Phase 3 多平台封面生成
+    └── frame-screenshots.mjs     # Phase 3 截图美化脚本（计划中）
 ```
 
 ---

@@ -203,14 +203,123 @@ const templates = {
     ${data.references ? `<div class="references-list">${data.references}</div>` : ''}
   </div>
 </section>
+,
+
+  // R13: Cover - Large title slide with name, title, and tagline
+  R13: (data) => `
+<section class="slide" data-layout="R13">
+  <div class="cover-container">
+    <h1 class="cover-name">${data.name || 'Your Name'}</h1>
+    <p class="cover-title">${data.title || 'Professional Title'}</p>
+    <p class="cover-tagline">${data.tagline || 'Brief professional tagline or value proposition'}</p>
+    <div class="cover-contact">
+      ${data.email ? `<span class="contact-item">${data.email}</span>` : ''}
+      ${data.phone ? `<span class="separator">|</span><span class="contact-item">${data.phone}</span>` : ''}
+      ${data.location ? `<span class="separator">|</span><span class="contact-item">${data.location}</span>` : ''}
+    </div>
+  </div>
+</section>
+`,
+
+  // R14: Stats - Large numbers showcasing key achievements
+  R14: (data) => `
+<section class="slide" data-layout="R14">
+  <h2 class="section-title">Key Impacts</h2>
+  <div class="stats-grid">
+    ${(data.stats || [
+      { label: 'Years Experience', value: '10+' },
+      { label: 'Projects Delivered', value: '50+' },
+      { label: 'Team Size Led', value: '15' },
+      { label: 'Efficiency Gain', value: '40%' }
+    ]).map(stat => `
+      <div class="stat-item">
+        <div class="stat-value">${stat.value}</div>
+        <div class="stat-label">${stat.label}</div>
+      </div>
+    `).join('  ')}
+  </div>
+</section>
+`,
+
+  // R15: Project Cards - Two-column grid for showcasing multiple projects
+  R15: (data) => `
+<section class="slide" data-layout="R15">
+  <h2 class="section-title">Featured Projects</h2>
+  <div class="projects-grid">
+    ${(data.projects || [
+      { title: 'Project Alpha', tech: 'React, Node.js', desc: 'A cloud-based analytics platform.' },
+      { title: 'Project Beta', tech: 'Python, TensorFlow', desc: 'Machine learning recommendation engine.' }
+    ]).map(proj => `
+      <div class="project-card">
+        <h3 class="card-title">${proj.title}</h3>
+        <p class="card-tech">${proj.tech}</p>
+        <p class="card-desc">${proj.desc}</p>
+      </div>
+    `).join('  ')}
+  </div>
+</section>
+`,
+
+  // R16: Skills Tags - Visual tag cloud for skills
+  R16: (data) => `
+<section class="slide" data-layout="R16">
+  <h2 class="section-title">Skills & Technologies</h2>
+  <div class="skills-tags">
+    ${(data.skills || [
+      'JavaScript', 'TypeScript', 'React', 'Vue.js', 'Node.js', 'Python',
+      'AWS', 'Docker', 'Kubernetes', 'PostgreSQL', 'MongoDB', 'GraphQL'
+    ]).map(skill => `<span class="skill-tag">${skill}</span>`).join(' ')}
+  </div>
+</section>
+`,
+
+  // R17: Timeline - Vertical timeline of career progression
+  R17: (data) => `
+<section class="slide" data-layout="R17">
+  <h2 class="section-title">Career Timeline</h2>
+  <div class="timeline">
+    ${(data.timeline || [
+      { year: '2020-Present', role: 'Senior Engineer', company: 'Tech Corp' },
+      { year: '2018-2020', role: 'Engineer', company: 'StartupXYZ' },
+      { year: '2016-2018', role: 'Junior Developer', company: 'FirstCo' }
+    ]).map(item => `
+      <div class="timeline-item">
+        <div class="timeline-year">${item.year}</div>
+        <div class="timeline-content">
+          <h3 class="timeline-role">${item.role}</h3>
+          <p class="timeline-company">${item.company}</p>
+        </div>
+      </div>
+    `).join('')}
+  </div>
+</section>
+`,
+
+  // R18: Contact - QR code and social links
+  R18: (data) => `
+<section class="slide" data-layout="R18">
+  <div class="contact-container">
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="contact-grid">
+      <div class="contact-item-block">
+        <div class="qr-placeholder">[QR Code]</div>
+        <p class="qr-label">Scan for contact</p>
+        ${data.qrUrl ? `<img src="${data.qrUrl}" alt="QR Code" class="qr-image">` : ''}
+      </div>
+      <div class="contact-info-block">
+        <h3 class="info-name">${data.name || 'Your Name'}</h3>
+        <p class="info-title">${data.title || 'Professional Title'}</p>
+        <div class="info-list">
+          ${data.email ? `<p><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></p>` : ''}
+          ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
+          ${data.linkedin ? `<p><strong>LinkedIn:</strong> <a href="${data.linkedin}">${data.linkedin}</a></p>` : ''}
+          ${data.github ? `<p><strong>GitHub:</strong> <a href="${data.github}">${data.github}</a></p>` : ''}
+          ${data.website ? `<p><strong>Website:</strong> <a href="${data.website}">${data.website}</a></p>` : ''}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`
 `
 };
-
-// Export for both Node.js CommonJS and ESM
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = templates;
-}
-// For ESM imports
-if (typeof window === 'undefined') {
-  export default templates;
-}

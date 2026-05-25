@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-default-theme="conservative">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -339,6 +339,209 @@
       margin-right: auto;
     }
 
+    /* === Phase 1 新版式样式 (R13-R18) === */
+
+    /* R13: Cover */
+    .cover-container {
+      text-align: center;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .cover-name {
+      font-size: 5rem;
+      margin-bottom: 0.5em;
+    }
+    .cover-title {
+      font-size: 1.5rem;
+      opacity: 0.8;
+      margin-bottom: 0.5em;
+    }
+    .cover-tagline {
+      font-size: 1.2rem;
+      opacity: 0.7;
+      max-width: 600px;
+      margin-bottom: 1.5em;
+    }
+    .cover-contact {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1em;
+      font-size: 1rem;
+      opacity: 0.75;
+    }
+
+    /* R14: Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2em;
+      margin-top: 1em;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 1.5em;
+      border: 1px solid var(--ink);
+      border-radius: 4px;
+    }
+    .stat-value {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 0.3em;
+      color: var(--accent);
+    }
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    /* R15: Project Cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5em;
+      margin-top: 0.8em;
+    }
+    .project-card {
+      padding: 1.2em;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 6px;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.3em;
+      color: var(--accent);
+    }
+    .card-tech {
+      font-size: 0.85rem;
+      opacity: 0.75;
+      margin-bottom: 0.4em;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .card-desc {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* R16: Skills Tags */
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8em 1em;
+      margin-top: 0.6em;
+    }
+    .skill-tag {
+      display: inline-block;
+      padding: 0.4em 0.9em;
+      border: 1px solid var(--ink);
+      border-radius: 2px;
+      font-size: 0.9rem;
+    }
+
+    /* R17: Timeline */
+    .timeline {
+      position: relative;
+      margin-top: 1em;
+      padding-left: 2em;
+      border-left: 2px solid var(--accent);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2em;
+      padding-left: 1em;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -2.6em;
+      top: 0.3em;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .timeline-year {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      font-family: 'IBM Plex Mono', monospace;
+      margin-bottom: 0.2em;
+    }
+    .timeline-content {
+      margin-left: 0.5em;
+    }
+    .timeline-role {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .timeline-company {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    /* R18: Contact */
+    .contact-container {
+      text-align: center;
+      padding-top: 10vh;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3em;
+      margin-top: 2em;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    .contact-item-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-placeholder {
+      width: 150px;
+      height: 150px;
+      border: 2px dashed var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.5;
+      font-size: 0.9rem;
+    }
+    .qr-label {
+      margin-top: 0.8em;
+      font-size: 0.85rem;
+      opacity: 0.75;
+    }
+    .qr-image {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+    }
+    .contact-info-block {
+      padding-top: 1em;
+    }
+    .info-name {
+      font-size: 1.8rem;
+      margin-bottom: 0.3em;
+    }
+    .info-title {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      margin-bottom: 1em;
+    }
+    .info-list p {
+      margin-bottom: 0.6em;
+      font-size: 0.95rem;
+    }
+
     /* Print Styles */
     @media print {
       .slide {
@@ -364,9 +567,9 @@
   <div id="deck"></div>
 
   <script src="templates.js"></script>
+  <script src="themes.js"></script>
   <script>
-    // Minimal skeleton: Skill will populate #deck with generated slides
-    console.log('Resume HTML Template loaded. Use templates.js to generate slides.');
+    console.log('Conservative Template loaded. Theme auto-applied by themes.js.');
   </script>
 </body>
 </html>

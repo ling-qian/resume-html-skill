@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" data-default-theme="modern">
+<html lang="en" data-default-theme="editorial">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume - [Your Name]</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* Editorial - Theme Variables (will be set by themes.js) */
     :root {
-      /* Modern Theme - Deep Blue with Klein Blue Accent */
-      --ink: #0a1f3d;
-      --ink-rgb: 10, 31, 61;
-      --paper: #f1f3f5;
-      --paper-rgb: 241, 243, 245;
-      --accent: #002FA7; /* International Klein Blue */
-      --accent-rgb: 0, 47, 167;
+      --ink: #2D2D2D;
+      --paper: #F5F5F0;
+      --accent: #C41E3A;
+      --spacing-padding: 5vh 5vw;
+      --name-size: 3.5rem;
+      --section-title-size: 2.2rem;
+      --border-width: 1px;
+      --border-radius: 0;
+      --font-body: var(--font-serif-en);
+    }
 
-      /* Typography */
-      --font-sans-en: 'IBM Plex Sans', sans-serif;
-      --font-sans-zh: 'Noto Sans SC', sans-serif;
-      --font-body: var(--font-sans-en);
+    :root {
+      --font-serif-en: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+      --font-serif-zh: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
     }
 
     * {
@@ -36,7 +39,7 @@
       color: var(--ink);
       font-family: var(--font-body);
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.8;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
@@ -45,85 +48,83 @@
     .slide {
       width: 100vw;
       height: 100vh;
-      padding: 2vh 2.5vw;
+      padding: var(--spacing-padding);
       overflow: hidden;
       position: relative;
       page-break-after: always;
       print-break-after: always;
     }
 
-    /* Typography */
+    /* Typography - Editorial: warm, literary, airy */
     .name {
-      font-family: var(--font-sans-en);
-      font-size: 2.5rem;
-      font-weight: 700;
+      font-family: var(--font-serif-en);
+      font-size: var(--name-size);
+      font-weight: 600;
       line-height: 1.1;
-      margin-bottom: 0.25em;
-      color: var(--accent);
+      margin-bottom: 0.5em;
+      letter-spacing: -0.01em;
     }
 
     .title {
-      font-size: 1rem;
+      font-size: 1.35rem;
       font-weight: 500;
-      margin-bottom: 0.6em;
-      opacity: 0.85;
+      margin-bottom: 1.2em;
+      opacity: 0.8;
+      font-style: italic;
     }
 
     .section-title {
-      font-size: 1.2rem;
+      font-size: var(--section-title-size);
       font-weight: 600;
-      margin-bottom: 0.5em;
-      padding-bottom: 0.3em;
-      border-bottom: 2px solid var(--accent);
-      color: var(--accent);
+      margin-bottom: 1em;
+      padding-bottom: 0.6em;
+      border-bottom: var(--border-width) solid var(--accent);
+      font-style: italic;
     }
 
     /* Header */
     .resume-header .contact-info {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8em;
-      font-size: 0.8rem;
-      opacity: 0.75;
-      margin-top: 0.5em;
-    }
-
-    .contact-item {
-      font-family: 'IBM Plex Mono', monospace;
+      gap: 1.2em;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-top: 0.8em;
+      font-family: 'IBM Plex Mono', 'SF Mono', monospace;
     }
 
     .separator {
-      opacity: 0.4;
+      opacity: 0.3;
     }
 
     /* Summary */
     .summary-content p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      text-align: left;
-      max-width: 850px;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      text-align: justify;
+      max-width: 700px;
+      hyphens: auto;
     }
 
-    /* Skills */
+    /* Skills - Editorial: softer, outline style */
     .skills-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.7em 1em;
+      gap: 0.7em 1.2em;
     }
 
     .skill-tag {
       display: inline-block;
-      padding: 0.25em 0.7em;
-      background: var(--accent);
-      color: white;
-      border-radius: 3px;
-      font-size: 0.8rem;
-      font-weight: 500;
+      padding: 0.3em 0.8em;
+      border: 1px solid var(--ink);
+      border-radius: var(--border-radius);
+      font-size: 0.9rem;
+      opacity: 0.85;
     }
 
-    /* Experience */
+    /* Experience - Editorial: spacious, narrative */
     .experience-entry {
-      margin-bottom: 1.2em;
+      margin-bottom: 2em;
     }
 
     .exp-header {
@@ -131,26 +132,28 @@
       justify-content: space-between;
       align-items: baseline;
       margin-bottom: 0.3em;
+      padding-bottom: 0.4em;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
     .company {
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--accent);
     }
 
     .date {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'IBM Plex Mono', 'SF Mono', monospace;
       font-size: 0.85rem;
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
     .position {
-      font-size: 0.9rem;
+      font-size: 1.05rem;
       font-weight: 500;
       font-style: italic;
-      margin-bottom: 0.5em;
-      opacity: 0.9;
+      margin-bottom: 0.7em;
+      opacity: 0.85;
     }
 
     .bullets {
@@ -160,30 +163,30 @@
 
     .bullets li {
       position: relative;
-      padding-left: 1.2em;
-      margin-bottom: 0.2em;
-      font-size: 0.85rem;
-      line-height: 1.35;
+      padding-left: 1.6em;
+      margin-bottom: 0.7em;
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     .bullets li::before {
-      content: "▸";
+      content: "•";
       position: absolute;
       left: 0;
       color: var(--accent);
-      font-weight: bold;
+      font-weight: 600;
     }
 
     /* Dual Experience */
     .dual-experience {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5em;
+      gap: 2.5em;
     }
 
     /* Education */
     .education-entry {
-      margin-bottom: 0.8em;
+      margin-bottom: 1.5em;
     }
 
     .edu-header {
@@ -194,7 +197,7 @@
     }
 
     .institution {
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-weight: 600;
       color: var(--accent);
     }
@@ -207,30 +210,26 @@
 
     .gpa {
       font-size: 0.9rem;
-      opacity: 0.8;
+      opacity: 0.75;
     }
 
     /* Projects */
     .project-entry {
-      margin-bottom: 0.8em;
+      margin-bottom: 1.8em;
     }
 
     .project-title {
-      font-size: 1rem;
+      font-size: 1.15rem;
       font-weight: 600;
-      margin-bottom: 0.2em;
+      margin-bottom: 0.25em;
       color: var(--accent);
     }
 
     .tech-stack {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-      opacity: 0.7;
-      margin-bottom: 0.3em;
-      background: rgba(0, 47, 167, 0.1);
-      display: inline-block;
-      padding: 0.15em 0.4em;
-      border-radius: 2px;
+      font-family: 'IBM Plex Mono', 'SF Mono', monospace;
+      font-size: 0.85rem;
+      opacity: 0.65;
+      margin-bottom: 0.5em;
     }
 
     /* Certifications */
@@ -239,8 +238,8 @@
     }
 
     .cert-list li {
-      margin-bottom: 0.5em;
-      font-size: 0.9rem;
+      margin-bottom: 0.9em;
+      font-size: 1rem;
       padding-left: 1.2em;
       position: relative;
     }
@@ -250,7 +249,7 @@
       position: absolute;
       left: 0;
       color: var(--accent);
-      font-weight: bold;
+      font-weight: 600;
     }
 
     .cert-issuer {
@@ -262,16 +261,16 @@
 
     .cert-date {
       float: right;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'IBM Plex Mono', 'SF Mono', monospace;
       font-size: 0.85rem;
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
     /* Languages */
     .language-list {
       display: flex;
       flex-direction: column;
-      gap: 0.6em;
+      gap: 1em;
     }
 
     .language-item {
@@ -287,7 +286,7 @@
 
     .proficiency-bar {
       height: 8px;
-      background: rgba(10, 31, 61, 0.15);
+      background: rgba(0,0,0,0.06);
       border-radius: 4px;
       overflow: hidden;
     }
@@ -300,11 +299,12 @@
     .proficiency-level {
       font-size: 0.85rem;
       opacity: 0.7;
+      font-family: 'IBM Plex Mono', monospace;
     }
 
     /* Volunteer */
     .volunteer-entry {
-      margin-bottom: 1.5em;
+      margin-bottom: 1.6em;
     }
 
     .organization {
@@ -315,255 +315,47 @@
 
     .role {
       font-size: 1rem;
+      font-weight: 500;
       font-style: italic;
       margin-bottom: 0.5em;
-      opacity: 0.9;
+      opacity: 0.85;
     }
 
     /* Publications */
     .publication-entry {
-      margin-bottom: 1.2em;
+      margin-bottom: 1.4em;
     }
 
     .pub-title {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 0.2em;
+      margin-bottom: 0.15em;
       color: var(--accent);
     }
 
     .pub-venue {
       font-style: italic;
-      opacity: 0.9;
+      opacity: 0.85;
     }
 
     .pub-date {
       float: right;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'IBM Plex Mono', 'SF Mono', monospace;
       font-size: 0.85rem;
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
     /* Closing */
     .closing-content {
       text-align: center;
-      padding-top: 15vh;
+      padding-top: 20vh;
     }
 
     .closing-content h2 {
-      font-size: 1.8rem;
-      margin-bottom: 0.8em;
-      color: var(--accent);
+      font-size: 2.5rem;
+      margin-bottom: 1em;
+      font-style: italic;
     }
-
-    /* === Phase 1 新版式样式 (R13-R18) === */
-
-    /* R13: Cover */
-    .cover-container {
-      text-align: center;
-      height: 80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .cover-name {
-      font-size: 3rem;
-      margin-bottom: 0.5em;
-    }
-    .cover-title {
-      font-size: 1.2rem;
-      opacity: 0.85;
-      margin-bottom: 0.4em;
-    }
-    .cover-tagline {
-      font-size: 1rem;
-      opacity: 0.75;
-      max-width: 600px;
-      margin-bottom: 1.2em;
-    }
-    .cover-contact {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.8em;
-      font-size: 0.9rem;
-      opacity: 0.75;
-    }
-
-    /* R14: Stats */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5em;
-      margin-top: 1em;
-    }
-    .stat-item {
-      text-align: center;
-      padding: 1.2em;
-      background: rgba(0, 47, 167, 0.05);
-      border-radius: 8px;
-    }
-    .stat-value {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-bottom: 0.25em;
-      color: var(--accent);
-    }
-    .stat-label {
-      font-size: 0.95rem;
-      opacity: 0.8;
-    }
-
-    /* R15: Project Cards */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.2em;
-      margin-top: 0.8em;
-    }
-    .project-card {
-      padding: 1em;
-      background: rgba(0, 47, 167, 0.03);
-      border: 1px solid rgba(0, 47, 167, 0.1);
-      border-radius: 6px;
-    }
-    .card-title {
-      font-size: 1rem;
-      margin-bottom: 0.25em;
-      color: var(--accent);
-    }
-    .card-tech {
-      font-size: 0.8rem;
-      opacity: 0.7;
-      margin-bottom: 0.3em;
-      font-family: 'IBM Plex Mono', monospace;
-    }
-    .card-desc {
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    /* R16: Skills Tags */
-    .skills-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6em 0.9em;
-      margin-top: 0.6em;
-    }
-    .skill-tag {
-      display: inline-block;
-      padding: 0.3em 0.75em;
-      background: var(--accent);
-      color: white;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    /* R17: Timeline */
-    .timeline {
-      position: relative;
-      margin-top: 1em;
-      padding-left: 1.8em;
-      border-left: 2px solid var(--accent);
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 1.8em;
-      padding-left: 1em;
-    }
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -2.5em;
-      top: 0.35em;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid white;
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-    .timeline-year {
-      font-size: 0.85rem;
-      opacity: 0.7;
-      font-family: 'IBM Plex Mono', monospace;
-      margin-bottom: 0.15em;
-    }
-    .timeline-content {
-      margin-left: 0.4em;
-    }
-    .timeline-role {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--accent);
-    }
-    .timeline-company {
-      font-size: 0.9rem;
-      opacity: 0.85;
-    }
-
-    /* R18: Contact */
-    .contact-container {
-      text-align: center;
-      padding-top: 10vh;
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5em;
-      margin-top: 2em;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: left;
-    }
-    .contact-item-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .qr-placeholder {
-      width: 140px;
-      height: 140px;
-      border: 2px dashed var(--ink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0.5;
-      font-size: 0.85rem;
-    }
-    .qr-label {
-      margin-top: 0.7em;
-      font-size: 0.8rem;
-      opacity: 0.75;
-    }
-    .qr-image {
-      width: 140px;
-      height: 140px;
-      object-fit: contain;
-    }
-    .contact-info-block {
-      padding-top: 0.8em;
-    }
-    .info-name {
-      font-size: 1.6rem;
-      margin-bottom: 0.25em;
-    }
-    .info-title {
-      font-size: 1rem;
-      opacity: 0.85;
-      margin-bottom: 0.9em;
-    }
-    .info-list p {
-      margin-bottom: 0.5em;
-      font-size: 0.9rem;
-    }
-
-    /* Print Styles */
-
 
     .references-list {
       margin-top: 2em;
@@ -591,6 +383,225 @@
         print-color-adjust: exact;
       }
     }
+
+    /* === R13-R18 新版式样式 === */
+
+    /* R13: Cover */
+    .cover-container {
+      text-align: center;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .cover-name {
+      font-size: 4.5rem;
+      margin-bottom: 0.5em;
+      font-weight: 600;
+    }
+    .cover-title {
+      font-size: 1.4rem;
+      font-weight: 500;
+      opacity: 0.85;
+      margin-bottom: 0.6em;
+      font-style: italic;
+    }
+    .cover-tagline {
+      font-size: 1.2rem;
+      opacity: 0.75;
+      max-width: 680px;
+      margin-bottom: 1.5em;
+      line-height: 1.6;
+    }
+    .cover-contact {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1em;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* R14: Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.2em;
+      margin-top: 1.5em;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 1.8em;
+      border: 1px solid rgba(45,45,45,0.2);
+      border-radius: 2px;
+      background: rgba(196, 30, 58, 0.03);
+    }
+    .stat-value {
+      font-size: 3.6rem;
+      font-weight: 600;
+      margin-bottom: 0.35em;
+      color: var(--accent);
+      font-family: var(--font-serif-en);
+    }
+    .stat-label {
+      font-size: 1.05rem;
+      opacity: 0.85;
+      font-style: italic;
+    }
+
+    /* R15: Project Cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8em;
+      margin-top: 1.2em;
+    }
+    .project-card {
+      padding: 1.4em;
+      border: 1px solid rgba(45,45,45,0.15);
+      border-radius: 2px;
+      background: rgba(245, 245, 240, 0.5);
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.25em;
+      color: var(--accent);
+    }
+    .card-tech {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-bottom: 0.5em;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .card-desc {
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    /* R16: Skills Tags */
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8em 1.2em;
+      margin-top: 0.8em;
+    }
+    .skill-tag {
+      display: inline-block;
+      padding: 0.35em 0.85em;
+      border: 1px solid var(--ink);
+      border-radius: 2px;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* R17: Timeline */
+    .timeline {
+      position: relative;
+      margin-top: 1.4em;
+      padding-left: 2.8em;
+      border-left: 1px solid rgba(45,45,45,0.3);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2em;
+      padding-left: 1.2em;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -2.4em;
+      top: 0.4em;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--paper);
+      box-shadow: 0 0 0 2px rgba(196, 30, 58, 0.3);
+    }
+    .timeline-year {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      font-family: 'IBM Plex Mono', monospace;
+      margin-bottom: 0.2em;
+    }
+    .timeline-content {
+      margin-left: 0.5em;
+    }
+    .timeline-role {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .timeline-company {
+      font-size: 1rem;
+      opacity: 0.85;
+    }
+
+    /* R18: Contact */
+    .contact-container {
+      text-align: center;
+      padding-top: 18vh;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.2em;
+      margin-top: 2.8em;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    .contact-item-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-placeholder {
+      width: 170px;
+      height: 170px;
+      border: 1px solid rgba(45,45,45,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.5;
+      font-size: 0.9rem;
+    }
+    .qr-label {
+      margin-top: 1em;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      font-style: italic;
+    }
+    .qr-image {
+      width: 170px;
+      height: 170px;
+      object-fit: contain;
+    }
+    .contact-info-block {
+      padding-top: 1.5em;
+    }
+    .info-name {
+      font-size: 2.4rem;
+      font-weight: 600;
+      margin-bottom: 0.35em;
+    }
+    .info-title {
+      font-size: 1.2rem;
+      opacity: 0.85;
+      margin-bottom: 1.4em;
+    }
+    .info-list p {
+      margin-bottom: 0.75em;
+      font-size: 1.05rem;
+    }
+
+    /* Print */
+
   </style>
 </head>
 <body>
@@ -598,7 +609,7 @@
   <script src="templates.js"></script>
   <script src="themes.js"></script>
   <script>
-    console.log('Modern Template loaded. Theme auto-applied by themes.js.');
+    console.log('Editorial Template loaded. Theme auto-applied by themes.js.');
   </script>
 </body>
 </html>

@@ -294,7 +294,6 @@ const templates = {
   </div>
 </section>
 `,
-
   // R18: Contact - QR code and social links
   R18: (data) => `
 <section class="slide" data-layout="R18">
@@ -321,5 +320,9 @@ const templates = {
   </div>
 </section>
 `
-`
 };
+
+// Export for both Node.js CommonJS and ESM
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = templates;
+}

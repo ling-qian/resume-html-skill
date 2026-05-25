@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "ATS-friendly single-file HTML resume generator for AI agents",
   "main": "scripts/validate-resume.mjs",
-  "type": "module",
   "scripts": {
     "validate": "node scripts/validate-resume.mjs",
     "test": "node scripts/validate-resume.mjs test-output/index.html",
